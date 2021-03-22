@@ -1,3 +1,5 @@
+package Counter;
+
 public class Counter implements Runnable
 {
     private int count;
