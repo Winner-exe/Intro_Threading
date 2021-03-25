@@ -1,8 +1,5 @@
 package KnockKnock;
 
-import java.net.*;
-import java.io.*;
-
 public class KnockKnockProtocol {
     private static final int WAITING = 0;
     private static final int SENTKNOCKKNOCK = 1;
@@ -14,8 +11,8 @@ public class KnockKnockProtocol {
     private int state = WAITING;
     private int currentJoke = 0;
 
-    private String[] clues = { "Turnip", "Little Old Lady", "Atch", "Who", "Who" };
-    private String[] answers = { "Turnip the heat, it's cold in here!",
+    private final String[] clues = { "Turnip", "Little Old Lady", "Atch", "Who", "Who" };
+    private final String[] answers = { "Turnip the heat, it's cold in here!",
             "I didn't know you could yodel!",
             "Bless you!",
             "Is there an owl in here?",
