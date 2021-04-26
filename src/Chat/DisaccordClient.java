@@ -2,20 +2,17 @@ package Chat;
 
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class DisaccordClient
 {
     static boolean isConnected = false;
-    static final String hostname = "0.0.0.0";
+    static final String hostname = "10.15.207.71";
     static final int port = 4444;
 
     public static void main(String[] args)
     {
         System.out.println("Welcome to Disaccord!");
-        System.out.println("Username: ");
-        Scanner scan = new Scanner(System.in);
-        String username = scan.nextLine();
+        System.out.print("Username: ");
 
         try (
             Socket userSocket = new Socket(hostname, port);
@@ -28,13 +25,31 @@ public class DisaccordClient
             Thread fromServer = new Thread(new ReadingThread(in));
             fromServer.start();
 
-            out.println(username + " has connected.");
+            //Username Setup
+            String username = "";
+            while (username.length() == 0) {
+                username = userIn.readLine();
+                if (username.contains(" ")) {
+                    username = "";
+                    System.out.println("Your username cannot contain a space. Please choose a different username.");
+                    System.out.print("Username: ");
+                }
+            }
+
+            System.out.println("--------------------------------------------------------------");
+            System.out.println();
+
+            out.println(username);
 
             String fromUser;
-            while ((fromUser = userIn.readLine()) != null)
+            while ((fromUser = userIn.readLine()) != null && !fromUser.matches("!dc.*"))
             {
-                out.println(username + ": " + fromUser);
+                out.println(fromUser);
             }
+            out.println(fromUser);
+
+            userSocket.close();
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -43,7 +58,7 @@ public class DisaccordClient
 
     protected static class ReadingThread implements Runnable
     {
-        private BufferedReader in;
+        private final BufferedReader in;
 
         public ReadingThread(BufferedReader in)
         {

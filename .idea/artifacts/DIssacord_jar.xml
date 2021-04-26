@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DIssacord:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DIssacord_jar</output-path>
+    <root id="archive" name="Intro_Threading.jar">
+      <element id="module-output" name="Intro_Threading" />
+    </root>
+  </artifact>
+</component>
