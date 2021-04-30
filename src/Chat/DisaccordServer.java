@@ -14,7 +14,7 @@ public class DisaccordServer
         users = new HashMap<>();
         users.put("Server", new PrintWriter(System.out, true));
         isRunning = true;
-        Thread disconnectThread = new Thread(new DisconnectThread());
+        Thread disconnectThread = new Thread(new ServerThread());
         disconnectThread.start();
 
         do
@@ -105,11 +105,11 @@ public class DisaccordServer
         }
     }
 
-    protected static class DisconnectThread implements Runnable
+    protected static class ServerThread implements Runnable
     {
-        private Scanner in;
+        private final Scanner in;
 
-        public DisconnectThread() {in = new Scanner(System.in);}
+        public ServerThread() {in = new Scanner(System.in);}
 
         @Override
         public void run()
